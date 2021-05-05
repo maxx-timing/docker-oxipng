@@ -1,0 +1,25 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log In at ghcr.io
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GHCR_USER }}" --password-stdin
+      - name: Build and Push image to ghcr.io
+        run: |
+          image="ghcr.io/maxx-timing/oxipng"
+          docker build . --pull --tag "$image"
+          echo "Pushing $image ..."
+          docker push "$image"
+          
+          eval $(docker run --rm "$image" env | grep OXIPNG_VERSION)
+          docker tag "$image" "$image:$OXIPNG_VERSION"
+          echo "Pushing $image:$OXIPNG_VERSION ..."
+          docker push "$image:$OXIPNG_VERSION"
