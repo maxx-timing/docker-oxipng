@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM alpine:3.16
 
 LABEL org.opencontainers.image.description="Docker image based on Alpine with oxipng installed"
 LABEL org.opencontainers.image.source="https://github.com/maxx-timing/docker-oxipng"
