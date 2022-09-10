@@ -3,7 +3,7 @@ FROM alpine:3.16
 LABEL org.opencontainers.image.description="Docker image based on Alpine with oxipng installed"
 LABEL org.opencontainers.image.source="https://github.com/maxx-timing/docker-oxipng"
 
-ENV OXIPNG_VERSION=5.0.1
+ENV OXIPNG_VERSION=6.0.1
 RUN apk add --no-cache libgcc \
  && apk add --no-cache --virtual .build cargo \
  && wget -qO oxipng.tar.gz "https://github.com/shssoichiro/oxipng/archive/v$OXIPNG_VERSION.tar.gz" \
