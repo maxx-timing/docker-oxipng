@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.18
 SHELL ["/bin/busybox", "ash", "-o", "pipefail", "-c"]
 
 LABEL org.opencontainers.image.description="Docker image based on Alpine with oxipng installed"
