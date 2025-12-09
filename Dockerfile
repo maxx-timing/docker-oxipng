@@ -1,10 +1,16 @@
-FROM alpine:3.20
+FROM alpine:3.23
 SHELL ["/bin/busybox", "ash", "-o", "pipefail", "-c"]
 
 LABEL org.opencontainers.image.description="Docker image based on Alpine with oxipng installed"
 LABEL org.opencontainers.image.source="https://github.com/maxx-timing/docker-oxipng"
 
-ENV OXIPNG_VERSION=9.1.2
+# defaults from /usr/share/abuild/default.conf
+ENV CARGO_PROFILE_RELEASE_OPT_LEVEL=s
+ENV CARGO_PROFILE_RELEASE_PANIC=abort
+ENV CARGO_PROFILE_RELEASE_CODEGEN_UNITS=1
+ENV CARGO_PROFILE_RELEASE_LTO=true
+
+ENV OXIPNG_VERSION=10.0.0
 RUN apk add --no-cache libgcc \
  && apk add --no-cache --virtual .build cargo \
  && wget -qO- "https://crates.io/api/v1/crates/oxipng/$OXIPNG_VERSION/download" \
